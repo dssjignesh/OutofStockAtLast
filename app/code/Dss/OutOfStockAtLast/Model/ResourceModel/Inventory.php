@@ -77,10 +77,10 @@ class Inventory extends AbstractDb
      *
      * @param string $productSku
      * @param ?string $websiteCode
-     * @return int
+     * @return bool|int
      * @throws NoSuchEntityException
      */
-    public function getStockStatus(string $productSku, ?string $websiteCode): int
+    public function getStockStatus(string $productSku, ?string $websiteCode): bool|int
     {
         if ($this->moduleManager->isEnabled('Magento_Inventory')) {
             $stockStatus = $this->getMsiStock($productSku, $websiteCode);
@@ -90,7 +90,7 @@ class Inventory extends AbstractDb
                 ->getIsInStock();
         }
 
-        return (int) $stockStatus;
+        return $stockStatus;
     }
 
     /**
@@ -117,9 +117,9 @@ class Inventory extends AbstractDb
      * Get stock id
      *
      * @param string $websiteCode
-     * @return int|mixed
+     * @return int
      */
-    public function getStockId(string $websiteCode)
+    public function getStockId(string $websiteCode): int
     {
         if (!isset($this->stockIds[$websiteCode])) {
             $select = $this->getConnection()->select()

@@ -43,10 +43,10 @@ class Stock
      *
      * @param mixed $entityId
      * @param mixed $storeId
-     * @return int[]
+     * @return array
      * @throws NoSuchEntityException
      */
-    public function map($entityId, $storeId): array
+    public function map(mixed $entityId, mixed $storeId): array
     {
         $sku = $this->inventory->getSkuRelation((int) $entityId);
 

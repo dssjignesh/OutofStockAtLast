@@ -37,7 +37,7 @@ class AdditionalFieldMapperPlugin
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function afterGetAllAttributesTypes($subject, array $result): array
+    public function afterGetAllAttributesTypes(mixed $subject, array $result): array
     {
         foreach ($this->allowedFields as $fieldName => $fieldType) {
             $result[$fieldName] = ['type' => $fieldType];
@@ -53,7 +53,7 @@ class AdditionalFieldMapperPlugin
      * @param array $result
      * @return array
      */
-    public function afterBuildEntityFields($subject, array $result): array
+    public function afterBuildEntityFields(mixed $subject, array $result): array
     {
         return $this->afterGetAllAttributesTypes($subject, $result);
     }

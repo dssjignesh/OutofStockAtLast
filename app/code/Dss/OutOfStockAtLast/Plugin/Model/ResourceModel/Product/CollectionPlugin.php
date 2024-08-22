@@ -39,7 +39,7 @@ class CollectionPlugin
      */
     public function beforeSetOrder(
         Collection $subject,
-        $attribute,
+        mixed $attribute,
         string $dir = Select::SQL_DESC
     ): array {
         $subject->setFlag('is_processing', true);
@@ -80,7 +80,7 @@ class CollectionPlugin
     public function aroundSetOrder(
         Collection $subject,
         callable $proceed,
-        $attribute,
+        mixed $attribute,
         string $dir = Select::SQL_DESC
     ): Collection {
         $flagName = $this->_getFlag($attribute);
@@ -114,7 +114,7 @@ class CollectionPlugin
      */
     public function beforeAddOrder(
         Collection $subject,
-        $attribute,
+        mixed $attribute,
         string $dir = Select::SQL_DESC
     ): array {
         if (!$subject->getFlag('is_processing')) {

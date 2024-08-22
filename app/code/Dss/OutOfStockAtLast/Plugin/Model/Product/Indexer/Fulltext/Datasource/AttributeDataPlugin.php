@@ -50,19 +50,21 @@ class AttributeDataPlugin
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterAddData(
-        $subject,
+        mixed $subject,
         array $result,
-        $storeId,
+        mixed $storeId,
         array $indexData
     ): array {
         $this->inventory->saveRelation(array_keys($indexData));
+        // Use a temporary array to hold the updated results
+        $updatedResults = [];
         foreach ($result as $productId => $item) {
-            //phpcs:ignore Magento2.Performance.ForeachArrayMerge.ForeachArrayMerge
-            $item = array_merge($item, $this->stockDataMapper->map($productId, $storeId));
-            $result[$productId] = $item;
+            $mappedData = $this->stockDataMapper->map($productId, $storeId);
+            // Manually merge arrays without using array_merge
+            $updatedResults[$productId] = $item + $mappedData;
         }
         $this->inventory->clearRelation();
 
-        return $result;
+        return $updatedResults;
     }
 }

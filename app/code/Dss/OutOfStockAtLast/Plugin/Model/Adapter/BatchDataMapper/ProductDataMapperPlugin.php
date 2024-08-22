@@ -53,11 +53,11 @@ class ProductDataMapperPlugin
      */
     public function afterMap(
         ProductDataMapper $subject,
-        $documents,
-        $documentData,
-        $storeId,
-        $context
-    ) {
+        mixed $documents,
+        mixed $documentData,
+        mixed $storeId,
+        mixed $context
+    ): mixed {
         $this->inventory->saveRelation(array_keys($documents));
 
         foreach ($documents as $productId => $document) {

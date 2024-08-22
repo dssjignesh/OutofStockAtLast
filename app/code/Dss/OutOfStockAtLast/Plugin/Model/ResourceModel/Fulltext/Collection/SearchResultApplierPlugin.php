@@ -27,8 +27,9 @@ class SearchResultApplierPlugin
     /**
      * @param Flag $flag
      */
-    public function __construct(private Flag $flag)
-    {
+    public function __construct(
+        private Flag $flag
+    ) {
     }
 
     /**

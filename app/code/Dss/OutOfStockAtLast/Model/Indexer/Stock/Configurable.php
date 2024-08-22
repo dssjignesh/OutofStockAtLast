@@ -36,9 +36,10 @@ class Configurable extends DefaultIndexer
      * Calculate depends on simple products
      *
      * @param Select $select
+     * @return void
      * @throws \Zend_Db_Select_Exception
      */
-    private function _autoCalculate($select)
+    private function _autoCalculate(Select $select): void
     {
         $columns = $select->getPart(Select::COLUMNS);
         foreach ($columns as &$column) {

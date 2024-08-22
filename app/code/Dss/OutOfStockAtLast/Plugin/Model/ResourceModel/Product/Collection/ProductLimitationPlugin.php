@@ -28,8 +28,9 @@ class ProductLimitationPlugin
      * @param Flag $flag
      * @noinspection PhpUnused
      */
-    public function __construct(private Flag $flag)
-    {
+    public function __construct(
+        private Flag $flag
+    ) {
     }
 
     /**
