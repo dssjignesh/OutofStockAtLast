@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Digit Software Solutions.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ *
+ * @category  Dss
+ * @package   Dss_OutOfStockAtLast
+ * @author    Extension Team
+ * @copyright Copyright (c) 2024 Digit Software Solutions. ( https://digitsoftsol.com )
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\ProductFieldMapper">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::add_more_field"
+        type="Dss\OutOfStockAtLast\Plugin\Model\Adapter\AdditionalFieldMapperPlugin"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\ProductFieldMapperProxy">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::add_more_field_deprecated"
+        type="Dss\OutOfStockAtLast\Plugin\Model\Adapter\AdditionalFieldMapperPlugin"/>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\ProductDataMapper">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::add_data_to_mappers_result"
+        type="Dss\OutOfStockAtLast\Plugin\Model\Adapter\BatchDataMapper\ProductDataMapperPlugin"/>
+    </type>
+    <type name="Smile\ElasticsuiteCatalog\Model\Product\Indexer\Fulltext\Datasource\AttributeData">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::smile_add_data_to_mappers_result"
+        type="Dss\OutOfStockAtLast\Plugin\Model\Product\Indexer\Fulltext\Datasource\AttributeDataPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection\ProductLimitation">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::ignore_limitation_filter_using_price"
+        type="Dss\OutOfStockAtLast\Plugin\Model\ResourceModel\Product\Collection\ProductLimitationPlugin"/>
+    </type>
+    <type name="Magento\Elasticsearch\Model\ResourceModel\Fulltext\Collection\SearchResultApplier">
+        <plugin sortOrder="10" name="Dss_OutOfStockAtLast::mark_apply_flag"
+        type="Dss\OutOfStockAtLast\Plugin\Model\ResourceModel\Fulltext\Collection\SearchResultApplierPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Model\ProductTypes\Config\Reader">
+        <arguments>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/type/stockIndexerModel" xsi:type="string"/>
+            </argument>
+        </arguments>
+    </type>
+</config>
